@@ -511,6 +511,11 @@ function handleClick() {
 </p>
 {/if}
 
+<audio id='beep' bind:this={cuckoo} >
+<source src='./src/lib/cuckoo_1.mp3' />
+<source src='./src/lib/cuckoo_1.wav' />
+</audio>	
+
 <style>
 	:root {
 	  --font-size: 24;
