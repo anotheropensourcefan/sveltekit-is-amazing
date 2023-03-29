@@ -257,11 +257,6 @@ function handleClick() {
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<p> Bonjour, version 5 </p>
-	<p> Running ? {running} </p>
-</section>
-
 {#if name !== ""}
 {#if !focusMode}
 <h1>
@@ -517,31 +512,94 @@ function handleClick() {
 {/if}
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
+	:root {
+	  --font-size: 24;
+	}
+	* {
+	  font-family: GlassAntiqua, Verdana, Courier Prime, Courier New, monospace;
+	  font-size: 12px;
 	}
 
 	h1 {
-		width: 100%;
+	  text-align: center;
+	  font-size: 150%;
 	}
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+	progress {
+	  border-radius: 5px;
+	  width: 100%;
 	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+	p,
+	input,
+	button {
+	  text-align: center;
+	}
+
+	input {
+	  width: calc(var(--font-size) * 5px);
+	}
+
+	#name-input {
+	  width: 100%;
+	  background: none !important;
+	  border: none;
+	}
+
+	.sub {
+	  font-size: 50%;
+	}
+
+	button {
+	  cursor: pointer;
+	  border: none;
+	  background: none;
+	  color: green;
+	}
+
+	button:hover {
+	  color: inherit;
+	}
+
+	.params-grid {
+	  width: 100%;
+	  display: flex;
+	  flex-direction: row;
+	  flex-wrap: wrap;
+	  padding-bottom: 10px;
+	  justify-content: space-evenly;
+	  flex-wrap: wrap;
+	}
+	.params-grid > span {
+	  flex: 0 0 auto;
+	}
+	.left {
+	  text-align: right;
+	  width: 35%;
+	  margin-right: 5%;
+	}
+	.right {
+	  text-align: left;
+	  width: 35%;
+	  margin-left: 5%;
+	}
+	.time-wrapper {
+	  width: 20%;
+	  text-align: center;
+	}
+	.preset {
+	  width: 15%;
+	  margin: auto;
+	}
+	.start-pause {
+	  width: 25%;
+	  margin: auto;
+	  font-size: --font-size;
+	}
+
+	.time {
+	  padding-bottom: 0;
+	  padding-top: 0;
+	  margin: 0;
 	}
 </style>
