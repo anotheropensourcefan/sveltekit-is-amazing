@@ -3,7 +3,6 @@
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	
-	<script>
 // audio
 let cuckoo;
 
