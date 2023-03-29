@@ -590,7 +590,7 @@ function handleClick() {
 	  width: 20%;
 	  text-align: center;
 	}
-	.preset {
+	.preset { 
 	  width: 15%;
 	  margin: auto;
 	}
