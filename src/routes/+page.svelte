@@ -10,7 +10,7 @@
 </svelte:head>
 
 <section>
-	<p> Bonjour, version 3 </p>
+	<p> Bonjour, version 4 </p>
 </section>
 
 <style>
