@@ -259,6 +259,7 @@ function handleClick() {
 
 <section>
 	<p> Bonjour, version 5 </p>
+	<p> Running ? {running} </p>
 </section>
 
 <style>
