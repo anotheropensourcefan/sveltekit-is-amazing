@@ -2,7 +2,7 @@
 import Counter from './Counter.svelte';
 	
 // audio
-let cuckoo;
+let cuckoo
 
 let firstVisit = true;
 let running = false;
@@ -509,7 +509,10 @@ function handleClick() {
 </p>
 {/if}
 
-
+<audio id='beep' bind:this={cuckoo} >
+<source src='src/lib/images/cuckoo_1.mp3' />
+<source src='src/lib/images/cuckoo_1.wav' />
+</audio>
 
 <style>
 	:root {
