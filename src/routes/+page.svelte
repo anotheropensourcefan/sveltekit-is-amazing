@@ -262,6 +262,260 @@ function handleClick() {
 	<p> Running ? {running} </p>
 </section>
 
+{#if name !== ""}
+{#if !focusMode}
+<h1>
+		{#if firstVisit || !running}
+		Hi {name} ! {messageFirstVisit}
+		{:else}
+			{#if session}
+			{messageSession.quote}
+			<span class="sub">{messageSession.source}, {messageSession.author}</span> 
+			{:else}
+			A break is like breathing : vital
+			{/if}
+		{/if}
+</h1>
+
+{#if minutesDate !== undefined}
+<p id='timer-label' >
+		{#if secondsDate >= 0 && minutesDate >= 0}
+		<span id='time-left' >{secondsDate === 60 ? minutesDate : minutesDate - 1}:{secondsDate < 10 ? "0" + secondsDate : secondsDate === 60 ? "00" : secondsDate}</span> before next {session ? "break" : "session"}<br>
+		{/if}
+	{messageTime}
+
+</p>
+{/if}
+
+<div class="params-grid">
+	
+	{#if !firstVisit}
+	<button class='start-pause' id='start_stop' type='text' on:click={handleClick}>
+			{running ? ": pause :" : "> resume >"}
+	</button>
+	{/if}
+
+	<button class='start-pause' type='text' on:click={() => {
+		if (firstVisit) firstVisit = false
+		session = true
+		pause = false
+		running = true
+		resetCounter()
+		}}>
+			{!firstVisit ? "< restart <" : "> start >"}
+	</button>
+
+	<button class='start-pause' type='text' on:click={() => {
+		if (firstVisit) firstVisit = false
+		session = true
+		pause = false
+		running = true
+		toDefault()
+		resetCounter()
+		}}>
+			{"< new life <"} 
+	</button>
+
+	{#if running}
+	<button class='start-pause' on:click={() => focusMode = !focusMode}>
+		~ focus ~
+	</button>
+	{/if}
+
+</div>
+
+{:else}
+
+{#if running}
+<p>
+	<label><progress max="{session ? sessionMinutes : pauseMinutes}" value="{intervalToChange/60000}"></progress></label><br>
+{#if pause}
+<i>On a break</i>
+{/if}
+<br>
+	<button on:click={() => focusMode = !focusMode}>
+		x
+	</button>
+</p>
+{/if}
+
+{/if}
+
+
+{#if !running}
+
+<section id="params">
+	<div class="params-grid">
+		<span class='left' id='session-label' >My session is</span>
+		<span class='time-wrapper'>
+			<button class='time' id='session-increment' on:click={() => {
+				if(sessionMinutes < 60) sessionMinutes += 1}}>
+				+
+			</button>
+			<button class='time' id='session-decrement' on:click={() => {if (sessionMinutes > 10) {
+				sessionMinutes -= 1
+				if (sessionMinutes < minutes) minutes = sessionMinutes
+				}}}>
+				-
+			</button>
+		</span>
+		<span class='right'><strong id='session-length'>{sessionMinutes}</strong> minutes long</span>
+</div>
+<br>
+<div class="params-grid">
+		<span class='left' id='break-label' >My break is</span>
+		<span class='time-wrapper'>
+			<button class='time' id='break-increment' on:click={() => {if(pauseMinutes<60) pauseMinutes += 1}}>
+			+
+			</button>
+			<button class='time' id='break-decrement' on:click={() => {if(pauseMinutes>1) pauseMinutes -= 1}}>
+				-
+			</button>
+		</span>
+			<span class='right'><strong id='break-length'>{pauseMinutes}</strong> {pauseMinutes !== 1 ? "minutes" : "minute"} long</span>
+	</div>
+<br>
+<div class="params-grid">
+<span class='preset'>
+		<button on:click={() =>
+			{
+			sessionMinutes = 15
+			pauseMinutes = 3
+			}
+			}>
+			15/3
+		</button>
+	</span>
+	<span class='preset'>
+		<button on:click={() =>
+			{
+			sessionMinutes = 25
+			pauseMinutes = 5
+			}
+			}
+			id='reset'>
+			25/5
+		</button>
+	</span>
+	<span class='preset'>
+		<button on:click={() =>
+			{
+			sessionMinutes = 40
+			pauseMinutes = 10
+			}
+			}>
+			40/10
+		</button>
+	</span>
+	<span class='preset'>
+		<button on:click={() =>
+				{
+				sessionMinutes = 60
+				pauseMinutes = 15
+				}
+				}>
+				60/15
+			</button>
+	</span>
+		
+</div>
+<div class="params-grid">
+	<span class="left">My day starts at</span>
+		<span class='time-wrapper'>
+			<button class='time' on:click={() => morningStart += 1}>
+					+
+				</button>
+				<button class='time' on:click={() => {if (morningStart > 0) morningStart -= 1}}>
+					-
+			</button>
+		</span>
+		
+		<span class="right"><strong>{morningStart}</strong> o'clock</span>
+</div>
+<br>
+<div class="params-grid">
+<span class='left'>
+	My day ends at
+</span>
+<span class='time-wrapper'>
+	<button class='time' on:click={() => {if (eveningEnd < 24) eveningEnd += 1}}>
+		+
+	</button>
+	<button class='time' on:click={() => eveningEnd -= 1}>
+		-
+	</button>
+</span>
+<span class='right'><strong>{eveningEnd}</strong> o'clock{eveningEnd < morningStart ? " tomorrow" : ""}</span>
+</div>
+<br>
+<div class="params-grid">
+<span class='left'>
+	{lunchStart <= 9 && lunchEnd <=10 && lunchEnd-lunchStart <= 3 ? "My breakfast" : "My lunch"} starts at
+</span>
+<span class='time-wrapper'>
+	<button class='time' on:click={() => {
+		if (lunchStart >= lunchEnd-1) lunchEnd += 1
+		lunchStart += 1}}>
+		+
+	</button>
+	<button class='time' on:click={() => lunchStart -= 1}>
+		-
+	</button>
+</span>
+<span class='right'><strong>{lunchStart}</strong> o'clock</span>
+</div>
+<br>
+<div class="params-grid">
+<span class='left'>
+	{lunchStart <= 9 && lunchEnd <=10 && lunchEnd-lunchStart <= 3 ? "My breakfast" : "My lunch"} ends at
+</span>
+<span class='time-wrapper'>
+	<button class='time' on:click={() => lunchEnd += 1}>
+		+
+	</button>
+	<button class='time' on:click={() => {if (lunchEnd <= lunchStart+1) {
+																																		lunchStart -=1
+																																		}
+																																		lunchEnd -= 1
+																																		}}>
+		-
+	</button>
+</span>
+<span class='right'><strong>{lunchEnd}</strong> o'clock</span>
+</div>
+
+</section>
+
+<p class='paragraph'>
+	Control time rather than being controlled by it !<br>
+	My name is Eole, from Earth.<br>
+	I designed this lovely app as part of my <a href="https://www.freecodecamp.org">FreeCodeCamp</a> learning path. This is my first attempt writing Javascript with a framework. So far, Svelte has been amazing.<br>
+</p>
+{/if}
+
+	
+{:else}
+<h1 id='messageFirstVisit-ID'>
+	{messageFirstVisit}
+</h1>
+{/if}
+
+{#if !running}
+<p>
+	{#if name !== ""}
+	What is your name ?
+	{/if}
+	<input type='text' placeholder="Enter your name" bind:value={name} id="name-input">
+</p>
+<p>
+	{#if name !== ""}
+	{#each history as day}
+	{day.date} : {day.sessions === 0 ? "no" : day.sessions} session{day.sessions !== 1 ? "s" : ""} ; {day.breaks === 0 ? "no" : day.breaks} break{day.breaks !== 1 ? "s" : ""}
+	{/each}
+	{/if}
+</p>
+{/if}
+
 <style>
 	section {
 		display: flex;
