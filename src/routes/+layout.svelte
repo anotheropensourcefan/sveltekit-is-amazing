@@ -10,7 +10,6 @@
 	<main>
 		<slot />
 	</main>
-	<p>this is the end</p>
 	<Footer />
 </div>
 
