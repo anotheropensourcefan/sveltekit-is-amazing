@@ -258,7 +258,7 @@ function handleClick() {
 </svelte:head>
 
 <section>
-	<p> Bonjour, version 4 </p>
+	<p> Bonjour, version 5 </p>
 </section>
 
 <style>
