@@ -510,8 +510,8 @@ function handleClick() {
 {/if}
 
 <audio id='beep' bind:this={cuckoo} >
-<source src='./src/lib/cuckoo_1.mp3' />
-<source src='./src/lib/cuckoo_1.wav' />
+<source src='/src/lib/cuckoo_1.mp3' />
+<source src='/src/lib/cuckoo_1.wav' />
 </audio>	
 
 <style>
