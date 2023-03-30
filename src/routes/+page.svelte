@@ -49,7 +49,7 @@ function setRandom(number = 1) {
 let messageTime = "";
 
 const arrayMessageFirstVisit = [
-	"Welcome to Pomo d'oro !",
+	"Welcome to Pomo d'oro ! Meet productivity in a zen environment",
 	"Discover Pomo d'oro, your companion for time tracking",
 	"Never miss a break with Pomo d'oro",
 	"Say hi to productivity ! Say hi to Pomo d'oro !",
@@ -508,9 +508,12 @@ function handleClick() {
 </p>
 {/if}
 
+
 <audio id='beep' bind:this={cuckoo} >
-<source src='src/lib/images/cuckoo_1.mp3' />
-<source src='src/lib/images/cuckoo_1.wav' />
+<source src='
+sveltekit-is-amazing/src/lib/images/cuckoo_1.mp3' />
+<source src='
+sveltekit-is-amazing/src/lib/images/cuckoo_1.wav' />
 </audio>
 
 <style>
