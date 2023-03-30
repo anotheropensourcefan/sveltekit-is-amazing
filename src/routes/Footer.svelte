@@ -4,7 +4,7 @@
 
 <style>
   p{
-   font-family: Verdana;
+   font-family: GlassAntiqua, Verdana, Courier New, monospace;
    text-align: center;
   }
 </style>
