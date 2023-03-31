@@ -563,7 +563,7 @@ sveltekit-is-amazing/src/lib/images/cuckoo_1.wav' />
 	}
 
 	button:hover {
-	  color: inherit;
+	  color: inherit ;
 	}
 
 	.params-grid {
